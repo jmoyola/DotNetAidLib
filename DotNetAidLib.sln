@@ -1,8 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetAidLib", "DotNetAidLib\DotNetAidLib.csproj", "{5BAC9223-63AC-4D84-8336-D94EFB66DB93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetAidLib.Core", "DotNetAidLib.Core\DotNetAidLib.Core.csproj", "{5BAC9223-63AC-4D84-8336-D94EFB66DB93}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetAidLibCmdTest", "DotNetAidLibCmdTest\DotNetAidLibCmdTest.csproj", "{D9367D65-D4AC-4D05-B12E-ACD533DBE5E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetAidLib.Database", "DotNetAidLib.Database\DotNetAidLib.Database.csproj", "{7BBB490C-0164-4973-8D42-161DCA4A6C09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetAidLib.Database.DAO", "DotNetAidLib.Database.DAO\DotNetAidLib.Database.DAO.csproj", "{63EEDFEF-6DAB-4256-8DEF-10D69D6E7A4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +22,13 @@ Global
 		{D9367D65-D4AC-4D05-B12E-ACD533DBE5E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9367D65-D4AC-4D05-B12E-ACD533DBE5E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9367D65-D4AC-4D05-B12E-ACD533DBE5E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BBB490C-0164-4973-8D42-161DCA4A6C09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BBB490C-0164-4973-8D42-161DCA4A6C09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BBB490C-0164-4973-8D42-161DCA4A6C09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BBB490C-0164-4973-8D42-161DCA4A6C09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63EEDFEF-6DAB-4256-8DEF-10D69D6E7A4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63EEDFEF-6DAB-4256-8DEF-10D69D6E7A4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63EEDFEF-6DAB-4256-8DEF-10D69D6E7A4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63EEDFEF-6DAB-4256-8DEF-10D69D6E7A4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

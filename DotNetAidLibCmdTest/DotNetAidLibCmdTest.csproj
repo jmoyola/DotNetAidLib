@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DotNetAidLib\DotNetAidLib.csproj" />
+      <ProjectReference Include="..\DotNetAidLib.Core\DotNetAidLib.Core.csproj" />
     </ItemGroup>
 
 </Project>
