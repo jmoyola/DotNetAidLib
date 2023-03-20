@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DotNetAidLib.Core\DotNetAidLib.Core.csproj" />
+      <ProjectReference Include="..\DotNetAidLib.Database\DotNetAidLib.Database.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Castle.Core" Version="5.1.1" />
+    </ItemGroup>
+
+</Project>
