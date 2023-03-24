@@ -100,11 +100,11 @@ namespace DotNetAidLib.Core.Helpers{
         
         public static bool Equals(T a, T b)
         {
-            if (a is null && b is null)
+            if (a == null && b == null)
                 return true;
-            else if (!(a is null))
+            else if (a != null)
                 return a.Equals(b);
-            else if (!(b is null))
+            else if (b != null)
                 return b.Equals(a);
             else
                 return a.Equals(b);

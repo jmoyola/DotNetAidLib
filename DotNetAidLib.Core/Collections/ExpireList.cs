@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DotNetAidLib.Core.Collections;
 using DotNetAidLib.Core.Develop;
-using DotNetAidLib.Core.Proc.Process;
+using DotNetAidLib.Core.Process;
 
 namespace DotNetAidLib.Core.Collections
 {

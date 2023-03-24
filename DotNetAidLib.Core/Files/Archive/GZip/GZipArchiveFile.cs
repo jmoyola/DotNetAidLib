@@ -68,7 +68,7 @@ namespace DotNetAidLib.Core.IO.Archive.Zip
                 int permissions=Convert.ToInt32("0777", 8);
 
                 /*
-                if (!Helpers.Helper.IsWindowsSO()){
+                if (!Helpers.RuntimeInformation.IsOSPlatform(OSPlatform.Windows)()){
                     Mono.Unix.UnixFileInfo uFile=new Mono.Unix.UnixFileInfo(fileToAdd.FullName);
                     username = uFile.OwnerUser.UserName;
                     groupname = uFile.OwnerGroup.GroupName;

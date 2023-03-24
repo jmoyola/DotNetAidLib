@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using DotNetAidLib.Core.IO.Streams.Imp;
 using DotNetAidLib.Core.Develop;
 
@@ -24,7 +25,7 @@ namespace DotNetAidLib.Core.IO.Streams
         public abstract FileStream Open(FileAccess fileAccess);
 
         public static RawStreamFactory Instance(String path) {
-            if (Helpers.Helper.IsWindowsSO())
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 return new WinRawStreamFactory(path);
             else
                 return new PosixRawStreamFactory(path);

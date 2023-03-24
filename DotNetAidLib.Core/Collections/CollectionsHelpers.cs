@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Security;
@@ -511,6 +512,88 @@ namespace DotNetAidLib.Core.Collections
             return ret;
         }
 
-        
+        public static IDictionary<String, String> ToDictionary(this NameValueCollection col)
+        {
+            IDictionary<String, String> dict = new Dictionary<String, String>();
+            foreach (var k in col.AllKeys)
+            {
+                dict.Add(k, col[k]);
+            }
+            return dict;
+        }
+        public static bool All<T> (this IList<T> v, Func<T, int, bool> predicate){
+            bool ret = true;
+            for (int i = 0; i < v.Count; i++) {
+                ret = ret && predicate.Invoke (v [i], i);
+                if (!ret)
+                    break;
+            }
+
+            return ret;
+        }
+
+        public static bool Any<T> (this IList<T> v, Func<T, int, bool> predicate)
+        {
+            bool ret = false;
+            for (int i = 0; i < v.Count; i++) {
+                ret = ret || predicate.Invoke (v [i], i);
+                if (ret)
+                    break;
+            }
+
+            return ret;
+        }
+
+        public static T GetOrDefault<T>(this IList<T> v, int index)
+        {
+            T ret = default(T);
+
+            if (index > -1 && index < v.Count)
+                ret = v[index];
+
+            return ret;
+        }
+
+        public static int IndexWhere<T>(this IList<T> v, Func<T, bool> where)
+        {
+            int ret = -1;
+            for (int i = 0; i < v.Count; i++)
+            {
+                if (where.Invoke(v[i]))
+                {
+                    ret = i;
+                    break;
+                }
+            }
+            return ret;
+        }
+
+        public static bool TryMax<T>(this IEnumerable<T> v, out T value){
+            value = default(T);
+            try
+            {
+                value = v.Max();
+                return true;
+            }
+            catch {
+                return false;
+            }
+
+        }
+
+        public static bool TryMin<T>(this IEnumerable<T> v, out T value)
+        {
+            value = default(T);
+            try
+            {
+                value = v.Min();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
     }
 }

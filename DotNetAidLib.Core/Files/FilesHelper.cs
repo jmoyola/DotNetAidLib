@@ -4,7 +4,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
+using System.Security.AccessControl;
 using System.Security.Cryptography;
+using System.Security.Principal;
 using System.Threading;
 using DotNetAidLib.Core.Context;
 using DotNetAidLib.Core.Develop;
@@ -14,6 +17,7 @@ using DotNetAidLib.Core.Proc;
 using DotNetAidLib.Core.Streams;
 using DotNetAidLib.Core.Time;
 using Mono.Unix;
+using System.Text;
 
 namespace DotNetAidLib.Core.Files
 {
@@ -23,7 +27,7 @@ namespace DotNetAidLib.Core.Files
         {
             try
             {
-                if (Helper.IsWindowsSO())
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
                     DirectorySecurity dSecurity = v.GetAccessControl();
                     dSecurity.AddAccessRule(
@@ -60,7 +64,7 @@ namespace DotNetAidLib.Core.Files
 
         public static bool IsExecutable(this FileInfo v)
         {
-            if (Helper.IsWindowsSO()
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 && (v.Extension.Equals(".exe", StringComparison.InvariantCultureIgnoreCase)
                     || v.Extension.Equals(".com", StringComparison.InvariantCultureIgnoreCase)
                     || v.Extension.Equals(".bat", StringComparison.InvariantCultureIgnoreCase)))
@@ -82,7 +86,7 @@ namespace DotNetAidLib.Core.Files
                 if (File.GetAttributes(v).HasFlag(FileAttributes.Directory))
                     return new DirectoryInfo(v);
                 else
-                    return new IO.FileInfo(v);
+                    return new FileInfo(v);
             }
             catch (Exception ex)
             {
@@ -358,70 +362,6 @@ namespace DotNetAidLib.Core.Files
             return ret.ToArray();
         }
 
-        public static String FromPathEnvironmentVariableExecute(this FileInfo v, String fileName,
-            String defaultValueIfNotFound, String arguments = null)
-        {
-            FileInfo f = v.FromPathEnvironmentVariable(fileName, false);
-            if (f == null)
-                return defaultValueIfNotFound;
-
-            if (String.IsNullOrEmpty(arguments))
-                return f.CmdExecuteSync();
-            else
-                return f.CmdExecuteSync(arguments);
-        }
-
-        public static String FromPathEnvironmentVariableSt(this FileInfo v, String fileName,
-            bool errorIfNotFound = false)
-        {
-            FileInfo ret = v.FromPathEnvironmentVariable(fileName, errorIfNotFound);
-            if (ret == null)
-                return null;
-            else
-                return ret.FullName;
-        }
-
-        public static FileInfo FromPathEnvironmentVariable(this FileInfo v, String fileName,
-            bool errorIfNotFound = false)
-        {
-            FileInfo ret = null;
-            ret = GetFileFromPathEnvironmentVariable(fileName, false);
-
-            if (ret == null
-                && Helper.IsWindowsSO()
-                && !fileName.EndsWith(".exe", StringComparison.InvariantCultureIgnoreCase))
-                ret = GetFileFromPathEnvironmentVariable(fileName + ".exe", errorIfNotFound);
-
-
-            return ret;
-        }
-
-        public static FileInfo GetFileFromPathEnvironmentVariable(String fileName)
-        {
-            return GetFileFromPathEnvironmentVariable(fileName, false);
-        }
-
-        public static FileInfo GetFileFromPathEnvironmentVariable(String fileName, bool errorIfNotFound)
-        {
-            FileInfo ret = null;
-            String pathVariable = Environment.GetEnvironmentVariable("PATH");
-            foreach (DirectoryInfo pathFolder in pathVariable.Split(Path.PathSeparator)
-                         .Select(d => new DirectoryInfo(d)))
-            {
-                if (pathFolder.Exists)
-                {
-                    ret = pathFolder.GetFiles(fileName).FirstOrDefault();
-                    if (ret != null)
-                        break;
-                }
-            }
-
-            if (errorIfNotFound && ret == null)
-                throw new FileNotFoundException("Can't find '" + fileName + "' from Path environment.");
-
-            return ret;
-        }
-
         public static byte[] CalculateHash(this FileInfo v)
         {
             byte[] ret;
@@ -519,18 +459,18 @@ namespace DotNetAidLib.Core.Files
             return ret;
         }
 
-        public static Process GetCmdProcess(this FileInfo v, ref StreamWriter input)
+        public static System.Diagnostics.Process GetCmdProcess(this FileInfo v, ref StreamWriter input)
         {
             return v.GetCmdProcess(null, ref input);
         }
 
 
-        public static Process GetCmdProcess(this FileInfo v)
+        public static System.Diagnostics.Process GetCmdProcess(this FileInfo v)
         {
             return v.GetCmdProcess(null);
         }
 
-        public static Process GetCmdProcess(this FileInfo v, string arguments, ref StreamWriter input)
+        public static System.Diagnostics.Process GetCmdProcess(this FileInfo v, string arguments, ref StreamWriter input)
         {
             ProcessStartInfo psi = null;
             psi = new ProcessStartInfo(v.FullName);
@@ -541,7 +481,7 @@ namespace DotNetAidLib.Core.Files
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;
 
-            Process ret = new Process();
+            System.Diagnostics.Process ret = new System.Diagnostics.Process();
             if (input != null)
                 psi.RedirectStandardInput = true;
 
@@ -554,7 +494,7 @@ namespace DotNetAidLib.Core.Files
             return ret;
         }
 
-        public static Process GetCmdProcess(this FileInfo v, string arguments)
+        public static System.Diagnostics.Process GetCmdProcess(this FileInfo v, string arguments)
         {
             ProcessStartInfo psi = new ProcessStartInfo(v.FullName);
 
@@ -564,33 +504,42 @@ namespace DotNetAidLib.Core.Files
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;
 
-            Process ret = new Process();
+            System.Diagnostics.Process ret = new System.Diagnostics.Process();
 
             ret.StartInfo = psi;
 
             return ret;
         }
 
-        public static String CmdExecuteSync(this FileInfo v, String arguments, int timeoutMs = -1,
-            bool ignoreExitCode = false)
+        public static void WriteText(this FileInfo v, String content, Encoding encoding=null, bool overrideIfExists=false)
         {
-            NetworkCredential nc = null;
-            if (ContextFactory.Instance().Attributes.ContainsKey("cmdExecuteSyncCredentials"))
-                nc = (NetworkCredential) ContextFactory.Instance().Attributes
-                    .GetValue("cmdExecuteSyncCredentials", null);
+            if (v.RefreshFluent().Exists && !overrideIfExists)
+                throw new Exception("File already exists");
 
-            return v.CmdExecuteSync(arguments, nc, timeoutMs, ignoreExitCode);
+            if(encoding==null)
+                encoding=Encoding.Default;
+            
+            using (FileStream fs = v.Open(FileMode.OpenOrCreate, FileAccess.Write))
+                using (StreamWriter sw=new StreamWriter(fs, encoding))
+                    sw.Write(content);
         }
+        
+        public static void AppendText(this FileInfo v, String content, Encoding encoding=null)
+        {
+            if (!v.RefreshFluent().Exists)
+                throw new Exception("File don't exists");
 
-        public static String CmdExecuteSync(this FileInfo v, String arguments, NetworkCredential credentials,
+            if(encoding==null)
+                encoding=Encoding.Default;
+            
+            using (FileStream fs = v.Open(FileMode.Append, FileAccess.Write))
+                using (StreamWriter sw=new StreamWriter(fs, encoding))
+                    sw.Write(content);
+        }
+        public static String CmdExecuteSync(this FileInfo v, String arguments,
             int timeoutMs = -1, bool ignoreExitCode = false)
         {
-            Process p = null;
-
-            if (credentials != null)
-                return Core.OperatingSystem.Core.OperatingSystem.Instance()
-                    .AdminExecute(v, arguments, credentials.UserName, credentials.Password, credentials.Domain,
-                        ignoreExitCode);
+            System.Diagnostics.Process p = null;
 
             try
             {
@@ -637,9 +586,9 @@ namespace DotNetAidLib.Core.Files
             return v.CmdExecuteSync(null);
         }
 
-        public static Process CmdExecuteAsync(this FileInfo v, String arguments)
+        public static System.Diagnostics.Process CmdExecuteAsync(this FileInfo v, String arguments)
         {
-            Process p;
+            System.Diagnostics.Process p;
             if (!String.IsNullOrEmpty(arguments))
                 p = v.GetCmdProcess(arguments);
             else

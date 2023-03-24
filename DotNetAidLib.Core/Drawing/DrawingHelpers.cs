@@ -56,6 +56,11 @@ namespace DotNetAidLib.Core.Drawing
                 && ((IPoint<T>)obj).y.Equals(this.y);
         }
 
+        public override int GetHashCode()
+        {
+            return this.x.GetHashCode() + this.y.GetHashCode();
+        }
+
         public override string ToString()
         {
             return "(" + this.x + ", " + this.y + ")";
@@ -88,6 +93,16 @@ namespace DotNetAidLib.Core.Drawing
         { return v.Equals(b); }
         public static bool operator !=(Point v, Point b)
         { return !v.Equals(b); }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 
     public class PointF

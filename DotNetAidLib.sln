@@ -8,6 +8,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetAidLib.Database", "Do
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetAidLib.Database.DAO", "DotNetAidLib.Database.DAO\DotNetAidLib.Database.DAO.csproj", "{63EEDFEF-6DAB-4256-8DEF-10D69D6E7A4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetAidLib.Network", "DotNetAidLib.Network\DotNetAidLib.Network.csproj", "{D0C4B8EC-DE09-4EDE-BBA3-A15DD652FDF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetAidLib.Configuration", "DotNetAidLib.Configuration\DotNetAidLib.Configuration.csproj", "{E21DCEEB-CB72-4926-B1D0-C692A5C4741F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetAidLib.Logger", "DotNetAidLib.Logger\DotNetAidLib.Logger.csproj", "{DDA847E7-FC5C-4C2C-AE4C-504093357DA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetAidLib.OperatingSystem", "DotNetAidLib.OperatingSystem\DotNetAidLib.OperatingSystem.csproj", "{6F7D1952-24C8-49D6-8F08-EC2061CA9EEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +38,21 @@ Global
 		{63EEDFEF-6DAB-4256-8DEF-10D69D6E7A4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63EEDFEF-6DAB-4256-8DEF-10D69D6E7A4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63EEDFEF-6DAB-4256-8DEF-10D69D6E7A4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0C4B8EC-DE09-4EDE-BBA3-A15DD652FDF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0C4B8EC-DE09-4EDE-BBA3-A15DD652FDF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0C4B8EC-DE09-4EDE-BBA3-A15DD652FDF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0C4B8EC-DE09-4EDE-BBA3-A15DD652FDF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E21DCEEB-CB72-4926-B1D0-C692A5C4741F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E21DCEEB-CB72-4926-B1D0-C692A5C4741F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E21DCEEB-CB72-4926-B1D0-C692A5C4741F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E21DCEEB-CB72-4926-B1D0-C692A5C4741F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDA847E7-FC5C-4C2C-AE4C-504093357DA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDA847E7-FC5C-4C2C-AE4C-504093357DA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDA847E7-FC5C-4C2C-AE4C-504093357DA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDA847E7-FC5C-4C2C-AE4C-504093357DA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F7D1952-24C8-49D6-8F08-EC2061CA9EEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F7D1952-24C8-49D6-8F08-EC2061CA9EEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F7D1952-24C8-49D6-8F08-EC2061CA9EEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F7D1952-24C8-49D6-8F08-EC2061CA9EEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

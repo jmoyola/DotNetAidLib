@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Globalization;
 using System.Diagnostics;
 using DotNetAidLib.Core.Files;
+using DotNetAidLib.Core.Helpers;
 using DotNetAidLib.Core.IO.Archive.Core;
 
 namespace DotNetAidLib.Core.IO.Archive.Tar
@@ -28,7 +29,7 @@ namespace DotNetAidLib.Core.IO.Archive.Tar
             : this(false) { }
 
         public TarCommand(bool adminExecute)
-            :this(new FileInfo(".").FromPathEnvironmentVariable("tar"), adminExecute){}
+            :this(EnvironmentHelper.SearchInPath("tar"), adminExecute){}
         
         public TarCommand(FileInfo tarCommandFile, bool adminExecute){
             Assert.Exists(tarCommandFile);
@@ -109,7 +110,7 @@ namespace DotNetAidLib.Core.IO.Archive.Tar
                 arguments += " -f \"" + tarfile.FullName + "\"";
 
 
-                Process p = this.tarCommandFile.GetCmdProcess(arguments);
+                System.Diagnostics.Process p = this.tarCommandFile.GetCmdProcess(arguments);
                 p.Start();
                 while(!p.HasExited){
                     String line = p.StandardOutput.ReadLine();

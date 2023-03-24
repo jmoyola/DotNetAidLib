@@ -7,23 +7,9 @@ using System.Threading;
 using DotNetAidLib.Core.Develop;
 using DotNetAidLib.Core.Helpers;
 using DotNetAidLib.Core.Proc;
-using System;
-using System.Threading;
 using System.Linq;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Diagnostics;
-using System.Security.Cryptography;
-using System.Data;
-using System.Net;
-using System.Runtime.Serialization;
 using System.Threading.Tasks;
-using System.Security.AccessControl;
 using System.Globalization;
-using System.Collections;
-using System.Security.Principal;
-using Mono.Unix;
 
 namespace DotNetAidLib.Core.Streams{
 

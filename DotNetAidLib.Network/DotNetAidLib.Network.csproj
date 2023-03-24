@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DotNetAidLib.Core\DotNetAidLib.Core.csproj" />
+      <ProjectReference Include="..\DotNetAidLib.OperatingSystem\DotNetAidLib.OperatingSystem.csproj" />
+    </ItemGroup>
+
+</Project>

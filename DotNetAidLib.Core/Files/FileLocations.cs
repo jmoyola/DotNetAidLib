@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using DotNetAidLib.Core.Helpers;
 using DotNetAidLib.Core.Introspection;
 using DotNetAidLib.Core.Files;
@@ -101,7 +102,7 @@ namespace DotNetAidLib.Core.Files
     {
         public static DirectoryInfo GetLocation(FileLocation location, String user = null)
         {
-            if (Helper.IsWindowsSO())
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 return GetLocationWin(location, user);
             else
                 return GetLocationPosix(location, user);
@@ -201,7 +202,7 @@ namespace DotNetAidLib.Core.Files
         }
         
         private static String GetUserDirectoryPosix(String user) {
-            FileInfo getentFI = new FileInfo(".").FromPathEnvironmentVariable("getent");
+            FileInfo getentFI = EnvironmentHelper.SearchInPath("getent");
             String ret = null;
             try
             {

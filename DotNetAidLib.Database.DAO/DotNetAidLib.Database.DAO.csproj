@@ -7,6 +7,7 @@
     <ItemGroup>
       <ProjectReference Include="..\DotNetAidLib.Core\DotNetAidLib.Core.csproj" />
       <ProjectReference Include="..\DotNetAidLib.Database\DotNetAidLib.Database.csproj" />
+      <ProjectReference Include="..\DotNetAidLib.OperatingSystem\DotNetAidLib.OperatingSystem.csproj" />
     </ItemGroup>
 
     <ItemGroup>

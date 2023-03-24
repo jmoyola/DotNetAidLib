@@ -1391,5 +1391,31 @@ namespace System
         {
             return Regex.Replace(v, pattern, evaluator, options);
         }
+        
+        public static IList<String> GroupsMatches(this Regex regex, String v)
+        {
+	        List<String> ret = new List<String>();
+
+	        Match m = regex.Match(v);
+	        foreach (Group g in m.Groups)
+		        ret.Add(g.Value);
+
+	        return ret;
+        }
+
+        public static IList<String> GroupMatchCaptures(this Regex regex, String v, int regexGroupIndex)
+        {
+	        List<String> ret = new List<String>();
+
+	        Match m = regex.Match(v);
+	        if (m.Groups.Count - 1 < regexGroupIndex)
+		        throw new Exception("No valid group index number.");
+	        foreach (Capture c in m.Groups[regexGroupIndex].Captures)
+	        {
+		        ret.Add(c.Value);
+	        }
+
+	        return ret;
+        }
     }
 }

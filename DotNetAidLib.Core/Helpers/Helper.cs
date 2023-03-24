@@ -11,6 +11,7 @@ using System.Linq;
 using System.Collections;
 using DotNetAidLib.Core.Collections;
 using System.Globalization;
+using System.Runtime.InteropServices;
 using DotNetAidLib.Core.Develop;
 
 namespace DotNetAidLib.Core.Helpers
@@ -42,21 +43,6 @@ namespace DotNetAidLib.Core.Helpers
                 .ToDictionary(kv => kv.Key, kv=> kv.Value);
         }
 
-        public static bool IsUserInteractive(){
-            bool ret;
-
-            if (IsMonoRuntime ()) {
-                if (IsWindowsSO ())
-                    ret = System.Environment.UserInteractive;
-                else {
-                    ret = Mono.Unix.Native.Syscall.isatty (0);
-                }
-            }else{
-                ret = System.Environment.UserInteractive;
-            }
-
-            return ret;
-        }
 
         public static R With<T, R>(T value, Func<T, R> withFunction){
             return withFunction.Invoke(value);
@@ -289,42 +275,6 @@ namespace DotNetAidLib.Core.Helpers
             
             return entryAssemblyInstance;
         }
-
-        public static bool IsCompiledInDebugMode(){
-			bool ret=false;
-
-            if (IsMonoRuntime())
-            {
-
-#if (DEBUG)
-                ret = true;
-#endif
-            }
-            else
-                ret = IsCompiledInDebugMode(GetEntryAssembly());
-			return ret;
-
-			//Assembly entryAssembly = Helpers.Helper.GetEntryAssembly();
-			//return IsCompiledInDebugMode (entryAssembly);
-		}
-
-		public static bool IsCompiledInDebugMode(Assembly assembly){
-			bool ret = false;
-
-			DebuggableAttribute debugAtt=assembly.GetCustomAttribute<DebuggableAttribute>();
-			if (debugAtt != null)
-				ret = debugAtt.IsJITOptimizerDisabled;
-
-			return ret;
-		}
-
-		public static bool IsWindowsSO(){
-			return Environment.OSVersion.ToString ().IndexOf ("win", StringComparison.InvariantCultureIgnoreCase) > -1;
-		}
-
-		public static bool IsMonoRuntime(){
-			return Type.GetType ("Mono.Runtime") != null;
-		}
         
         public static void TryTimes(Action action, int tryTimes = 1, int retryDelay=100) {
             Exception lastException = null;

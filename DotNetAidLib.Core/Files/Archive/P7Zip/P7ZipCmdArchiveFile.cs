@@ -6,9 +6,11 @@ using System.IO.Compression;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using DotNetAidLib.Core.IO.Archive.Core;
 using DotNetAidLib.Core.Develop;
 using DotNetAidLib.Core.Files;
+using DotNetAidLib.Core.Helpers;
 
 namespace DotNetAidLib.Core.IO.Archive.P7Zip
 {
@@ -32,14 +34,14 @@ namespace DotNetAidLib.Core.IO.Archive.P7Zip
 			get{
 				if (_SystemP7ZipCmdFile == null) {
 					// Preparamos la ruta al ejecutable del compresor p7zip
-					if (DotNetAidLib.Core.Helpers.Helper.IsWindowsSO ()) {
+					if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
 						_SystemP7ZipCmdFile = new FileInfo (new FileInfo (Assembly.GetExecutingAssembly ().Location).Directory.FullName + Path.DirectorySeparatorChar + "7za.exe");
 						if (_SystemP7ZipCmdFile == null)
-							_SystemP7ZipCmdFile = new FileInfo (".").FromPathEnvironmentVariable ("7za.exe");
+							_SystemP7ZipCmdFile = EnvironmentHelper.SearchInPath("7za.exe");
 					} else {
 						_SystemP7ZipCmdFile = new FileInfo (new FileInfo (Path.DirectorySeparatorChar + "usr" + Path.DirectorySeparatorChar + "bin" + Path.DirectorySeparatorChar + "7z").FullName);
 						if (_SystemP7ZipCmdFile == null)
-							_SystemP7ZipCmdFile = new FileInfo (".").FromPathEnvironmentVariable("7z");
+							_SystemP7ZipCmdFile = EnvironmentHelper.SearchInPath("7z");
 					}
 				}
 
@@ -59,7 +61,7 @@ namespace DotNetAidLib.Core.IO.Archive.P7Zip
 
         public override void Add(FileInfo fileToAdd, DirectoryInfo relativePath){
 			base.Add (fileToAdd, relativePath);
-			Process p = null;
+			System.Diagnostics.Process p = null;
 			try {
 				String relativePathAux=relativePath.FullName;
 				if(!relativePathAux.EndsWith("" + Path.DirectorySeparatorChar))
@@ -81,7 +83,7 @@ namespace DotNetAidLib.Core.IO.Archive.P7Zip
 
 		public override void Remove(ArchivePart archivePart){
 			base.Remove (archivePart);
-			Process p = null;
+			System.Diagnostics.Process p = null;
 			try {
 				p=_P7ZipCmdFile.GetCmdProcess("d -y \"" + _File.FullName + "\"" + (String.IsNullOrEmpty(this.Password)?"":" -p" + this.Password + " -mhc")  + " \"" + archivePart.FullName  + "\"");
 				p.Start();
@@ -97,7 +99,7 @@ namespace DotNetAidLib.Core.IO.Archive.P7Zip
 		}
 
 		public override IList<ArchivePart> Content(){
-			Process p = null;
+			System.Diagnostics.Process p = null;
 			IList<ArchivePart> ret = base.Content();
 			Regex p7zOutputListRegex=new Regex(@"^(\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2})\s([^\s]+)\s([\s\d]{12})\s([\s\d]{12})\s(.+)$", RegexOptions.Multiline);
 			try {
@@ -136,7 +138,7 @@ namespace DotNetAidLib.Core.IO.Archive.P7Zip
 
         public override void Get(ArchivePart archivePart, DirectoryInfo outDirectory, bool recursive=false)
         {
-            Process p = null;
+            System.Diagnostics.Process p = null;
             base.Get(archivePart, outDirectory, recursive);
             try
             {
@@ -168,7 +170,7 @@ namespace DotNetAidLib.Core.IO.Archive.P7Zip
         }
 
         public override void Get(ArchivePart archivePart, FileInfo outFile){
-			Process p = null;
+	        System.Diagnostics.Process p = null;
 			base.Get (archivePart, outFile);
 			try {
 
@@ -197,7 +199,7 @@ namespace DotNetAidLib.Core.IO.Archive.P7Zip
             else if (!this.OpenMode.Equals(ArchiveOpenMode.OpenRead))
                 throw new ArchiveException("Archive must be opened in read mode.");
 
-            Process p = null;
+            System.Diagnostics.Process p = null;
 
             try
             {
