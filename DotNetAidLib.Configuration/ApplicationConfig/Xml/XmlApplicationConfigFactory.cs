@@ -1,49 +1,45 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 using System.IO;
-using System.Reflection;
-using System.Configuration;
-using DotNetAidLib.Configuration.ApplicationConfig.Core;
-using DotNetAidLib.Core.Helpers;
 using DotNetAidLib.Core.Develop;
 using DotNetAidLib.Core.Files;
+using DotNetAidLib.Core.Helpers;
 
-namespace DotNetAidLib.Configuration.ApplicationConfig.Xml{
-	public class XmlApplicationConfigFactory
-	{
-		private static List<Type> _KnownTypes=new List<Type>();
+namespace DotNetAidLib.Configuration.ApplicationConfig.Xml
+{
+    public class XmlApplicationConfigFactory
+    {
+        private static readonly Dictionary<string, XmlApplicationConfig> m_Instances =
+            new Dictionary<string, XmlApplicationConfig>();
 
-		private static Dictionary<String, XmlApplicationConfig> m_Instances = new Dictionary<String, XmlApplicationConfig>();
+        private static readonly object oInstance = new object();
 
-		public static XmlApplicationConfig Instance()
-		{
+        public static List<Type> KnownTypes { get; } = new List<Type>();
+
+        public static XmlApplicationConfig Instance()
+        {
             return Instance(FileLocation.UserConfigurationDataFolder);
-		}
+        }
 
-		public static XmlApplicationConfig Instance(FileLocation location)
-		{
-            String fileName = Path.GetFileNameWithoutExtension(Helper.GetEntryAssembly().GetName().Name) + ".cfg";
+        public static XmlApplicationConfig Instance(FileLocation location)
+        {
+            var fileName = Path.GetFileNameWithoutExtension(Helper.GetEntryAssembly().GetName().Name) + ".cfg";
             return Instance(location, fileName);
-		}
+        }
 
-        public static XmlApplicationConfig Instance(FileLocation location, String fileName)
-		{
+        public static XmlApplicationConfig Instance(FileLocation location, string fileName)
+        {
+            var file = new FileInfo(FileLocations.GetLocation(location).FullName
+                                    + Path.DirectorySeparatorChar + fileName);
 
-            System.IO.FileInfo file = new System.IO.FileInfo(FileLocations.GetLocation(location).FullName
-                                        + Path.DirectorySeparatorChar + fileName);
-                                         
             return Instance(file);
-		}
+        }
 
-        private static Object oInstance = new object();
-        public static XmlApplicationConfig Instance(System.IO.FileInfo configFile)
-		{
+        public static XmlApplicationConfig Instance(FileInfo configFile)
+        {
             lock (oInstance)
             {
-                Assert.NotNull( configFile, nameof(configFile));
+                Assert.NotNull(configFile, nameof(configFile));
 
                 XmlApplicationConfig ret = null;
 
@@ -61,13 +57,6 @@ namespace DotNetAidLib.Configuration.ApplicationConfig.Xml{
 
                 return ret;
             }
-		}
-
-		public static List<Type> KnownTypes{
-			get{
-				return _KnownTypes;
-			}
-		}
-
-	}
+        }
+    }
 }

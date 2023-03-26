@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace DotNetAidLib.Core.Configuration.ApplicationConfig.Helpers
 {
-    public class ApplicationConfigHelperException:Exception
+    public class ApplicationConfigHelperException : Exception
     {
         public ApplicationConfigHelperException()
         {
@@ -13,11 +13,13 @@ namespace DotNetAidLib.Core.Configuration.ApplicationConfig.Helpers
         {
         }
 
-        public ApplicationConfigHelperException(string message, Exception innerException) : base(message, innerException)
+        public ApplicationConfigHelperException(string message, Exception innerException) : base(message,
+            innerException)
         {
         }
 
-        protected ApplicationConfigHelperException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected ApplicationConfigHelperException(SerializationInfo info, StreamingContext context) : base(info,
+            context)
         {
         }
     }

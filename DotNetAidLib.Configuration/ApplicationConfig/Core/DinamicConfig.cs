@@ -1,70 +1,58 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 
-namespace DotNetAidLib.Configuration.ApplicationConfig.Core{
-	public class DinamicConfig<T> : IConfig<T>
-	{
-
-		private DateTime m_DateOfCreation;
-		private DateTime m_DateOfModification;
-		private string m_Key;
+namespace DotNetAidLib.Configuration.ApplicationConfig.Core
+{
+    public class DinamicConfig<T> : IConfig<T>
+    {
         private string m_Info;
+        private string m_Key;
         private T m_Value;
-		private Type m_Type;
 
-		private Version m_Version;
-		public DinamicConfig(string key, T value)
-		{
-			m_DateOfCreation = DateTime.Now;
-			m_Key = key;
-			m_Value = value;
-			m_Type = typeof(T);
-			m_Version = new Version();
-		}
-
-		public System.DateTime DateOfCreation {
-			get { return m_DateOfCreation; }
-		}
-
-		public System.DateTime DateOfModification {
-			get { return m_DateOfModification; }
-		}
-
-		public string Key {
-			get { return m_Key; }
-			set {
-				m_Key = value;
-				m_DateOfModification = DateTime.Now;
-			}
-		}
-
-        public string Info
+        public DinamicConfig(string key, T value)
         {
-            get { return m_Info; }
+            DateOfCreation = DateTime.Now;
+            m_Key = key;
+            m_Value = value;
+            Type = typeof(T);
+            Version = new Version();
+        }
+
+        public DateTime DateOfCreation { get; }
+
+        public DateTime DateOfModification { get; private set; }
+
+        public string Key
+        {
+            get => m_Key;
             set
             {
-                m_Info = value;
-                m_DateOfModification = DateTime.Now;
+                m_Key = value;
+                DateOfModification = DateTime.Now;
             }
         }
 
-        public System.Type Type {
-			get { return m_Type; }
-		}
+        public string Info
+        {
+            get => m_Info;
+            set
+            {
+                m_Info = value;
+                DateOfModification = DateTime.Now;
+            }
+        }
 
-		public T Value {
-			get { return m_Value; }
-			set {
-				m_Value = value;
-				m_DateOfModification = DateTime.Now;
-			}
-		}
+        public Type Type { get; }
 
-		public System.Version Version {
-			get { return m_Version; }
-		}
-	}
+        public T Value
+        {
+            get => m_Value;
+            set
+            {
+                m_Value = value;
+                DateOfModification = DateTime.Now;
+            }
+        }
+
+        public Version Version { get; }
+    }
 }

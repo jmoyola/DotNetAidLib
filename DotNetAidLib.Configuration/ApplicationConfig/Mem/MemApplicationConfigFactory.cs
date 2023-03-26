@@ -1,35 +1,28 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
-using System.Configuration;
-using DotNetAidLib.Configuration.ApplicationConfig.Core;
-using DotNetAidLib.Core.Helpers;
-
 using DotNetAidLib.Core.Develop;
-using System.Runtime.CompilerServices;
 
-namespace DotNetAidLib.Configuration.ApplicationConfig.Mem{
-	public class MemApplicationConfigFactory
-	{
-		private static List<Type> _KnownTypes=new List<Type>();
+namespace DotNetAidLib.Configuration.ApplicationConfig.Mem
+{
+    public class MemApplicationConfigFactory
+    {
+        private static readonly Dictionary<string, MemApplicationConfig> m_Instances =
+            new Dictionary<string, MemApplicationConfig>();
 
-		private static Dictionary<String, MemApplicationConfig> m_Instances = new Dictionary<String, MemApplicationConfig>();
+        private static readonly object oInstance = new object();
 
-		public static MemApplicationConfig Instance()
-		{
+        public static List<Type> KnownTypes { get; } = new List<Type>();
+
+        public static MemApplicationConfig Instance()
+        {
             return Instance("__DEFAULT__");
-		}
+        }
 
-        private static Object oInstance = new object();
-        public static MemApplicationConfig Instance(String key)
-		{
+        public static MemApplicationConfig Instance(string key)
+        {
             lock (oInstance)
             {
-                Assert.NotNull( key, nameof(key));
+                Assert.NotNull(key, nameof(key));
 
                 MemApplicationConfig ret = null;
 
@@ -48,13 +41,6 @@ namespace DotNetAidLib.Configuration.ApplicationConfig.Mem{
 
                 return ret;
             }
-		}
-
-		public static List<Type> KnownTypes{
-			get{
-				return _KnownTypes;
-			}
-		}
-
-	}
+        }
+    }
 }
