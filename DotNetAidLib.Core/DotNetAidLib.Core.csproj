@@ -8,23 +8,23 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MailKit" Version="3.6.0"/>
-        <PackageReference Include="MimeKit" Version="3.6.1"/>
-        <PackageReference Include="Mono.Unix" Version="7.1.0-final.1.21458.1"/>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
-        <PackageReference Include="System.Diagnostics.EventLog" Version="8.0.0-preview.2.23128.3"/>
-        <PackageReference Include="System.Globalization.Extensions" Version="4.3.0"/>
-        <PackageReference Include="System.IO.FileSystem.AccessControl" Version="6.0.0-preview.5.21301.5"/>
-        <PackageReference Include="System.Management" Version="8.0.0-preview.2.23128.3"/>
-        <PackageReference Include="System.Numerics.Vectors" Version="4.5.0"/>
-        <PackageReference Include="System.Security.AccessControl" Version="6.0.2-mauipre.1.22102.15"/>
-        <PackageReference Include="System.ServiceProcess.ServiceController" Version="8.0.0-preview.2.23128.3"/>
-        <PackageReference Include="System.Text.Encoding" Version="4.3.0"/>
-        <PackageReference Include="System.Text.Encoding.Extensions" Version="4.3.0"/>
+        <PackageReference Include="MailKit" Version="3.6.0" />
+        <PackageReference Include="MimeKit" Version="3.6.1" />
+        <PackageReference Include="Mono.Unix" Version="7.1.0-final.1.21458.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="System.Diagnostics.EventLog" Version="8.0.0-preview.2.23128.3" />
+        <PackageReference Include="System.Globalization.Extensions" Version="4.3.0" />
+        <PackageReference Include="System.IO.FileSystem.AccessControl" Version="6.0.0-preview.5.21301.5" />
+        <PackageReference Include="System.Management" Version="8.0.0-preview.2.23128.3" />
+        <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+        <PackageReference Include="System.Security.AccessControl" Version="6.0.2-mauipre.1.22102.15" />
+        <PackageReference Include="System.ServiceProcess.ServiceController" Version="8.0.0-preview.2.23128.3" />
+        <PackageReference Include="System.Text.Encoding" Version="4.3.0" />
+        <PackageReference Include="System.Text.Encoding.Extensions" Version="4.3.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Core"/>
+        <Folder Include="Core" />
     </ItemGroup>
 
 </Project>

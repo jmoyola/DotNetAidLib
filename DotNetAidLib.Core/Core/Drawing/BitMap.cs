@@ -19,10 +19,10 @@ namespace DotNetAidLib.Core.Drawing
             _width = width;
             _height = height;
 
-            Points = new Vector<T>[width, height];
+            Points = new DotNetAidLib.Core.Collections.Vector<T>[width, height];
         }
 
-        public Vector<T>[,] Points { get; }
+        public DotNetAidLib.Core.Collections.Vector<T>[,] Points { get; set; }
 
         public void Dispose()
         {

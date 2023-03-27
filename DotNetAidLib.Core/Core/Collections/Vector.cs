@@ -6,52 +6,68 @@ using DotNetAidLib.Core.Develop;
 
 namespace DotNetAidLib.Core.Collections
 {
-    public class Vector<T> : IEnumerable<T>
+    public struct Vector<T> : IEnumerable<T>
     {
-        private readonly T[] _elements;
+        private T[] _content;
+
+        public Vector(params T[] content)
+        :this(content.ToList())
+        { }
+
+        public Vector(IList<T> content)
+        {
+            Assert.NotNullOrEmpty(content, nameof(content));
+            _content = (T[]) Activator.CreateInstance(typeof(T[]), content.Count);
+            content.ToArray().CopyTo(_content, 0);
+        }
 
         public Vector(int length)
         {
             Assert.GreaterThan(length, 0, nameof(length));
-            _elements = (T[]) Activator.CreateInstance(typeof(T[]), length);
+            _content = (T[]) Activator.CreateInstance(typeof(T[]), length);
         }
 
-        public int Length => _elements.Length;
+        public int Length => _content.Length;
 
         public T this[int index]
         {
-            get => _elements[index];
-            set => _elements[index] = value;
+            get => _content[index];
+            set => _content[index] = value;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            return _elements.ToList().GetEnumerator();
+            return _content.ToList().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return _elements.GetEnumerator();
+            return _content.GetEnumerator();
         }
 
         public bool Contains(T item)
         {
-            return Array.IndexOf(_elements, item) > -1;
+            return Array.IndexOf(_content, item) > -1;
         }
 
         public void CopyTo(T[] destination, int destinationIndex)
         {
-            Array.Copy(_elements, 0, destination, destinationIndex, _elements.Length);
+            Array.Copy(_content, 0, destination, destinationIndex, _content.Length);
         }
 
         public void CopyFrom(T[] source, int sourceIndex)
         {
-            Array.Copy(source, sourceIndex, _elements, 0, _elements.Length);
+            Array.Copy(source, sourceIndex, _content, 0, _content.Length);
+        }
+
+        public Vector<T> Clone()
+        {
+            return new Vector<T>(this._content);
         }
 
         public int IndexOf(byte item)
         {
-            return Array.IndexOf(_elements, item);
+            return Array.IndexOf(_content, item);
         }
 
         public static implicit operator Vector<T>(T[] value)
@@ -61,28 +77,13 @@ namespace DotNetAidLib.Core.Collections
 
         public static implicit operator T[](Vector<T> value)
         {
-            return value._elements;
+            return value._content;
         }
 
         public override string ToString()
         {
-            return _elements.ToStringJoin(", ");
+            return _content.ToStringJoin(", ");
         }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
-        public override bool Equals(object obj)
-        {
-            return (obj != null
-                    && obj.GetType().IsInstanceOfType(GetType())
-                    && ((Vector<T>) obj).Length == Length
-                    && ((Vector<T>) obj).ToList().All((v, i) => v.Equals(_elements[i])))
-                   || (obj.GetType().IsInstanceOfType(typeof(T[]))
-                       && ((T[]) obj).Length == Length
-                       && ((Vector<T>) obj).ToList().All((v, i) => v.Equals(_elements[i])));
-        }
+        
     }
 }
