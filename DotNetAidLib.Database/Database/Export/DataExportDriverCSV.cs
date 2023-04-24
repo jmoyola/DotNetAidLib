@@ -3,22 +3,26 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using DotNetAidLib.Core.Collections;
 using DotNetAidLib.Core.Develop;
 
 namespace DotNetAidLib.Database.Export
 {
     public class DataExportDriverCsv : DataExportDriver
     {
+        private readonly TypedProperties _properties;
         public DataExportDriverCsv()
         {
-            properties
-                .Add("culture", CultureInfo.CurrentCulture, AssertCondition.IsNotNull)
-                .Add("encoding", Encoding.Default, AssertCondition.IsNotNull)
-                .Add("includeHeaders", true)
-                .Add("fieldSeparator", ',')
-                .Add("recordSeparator", Environment.NewLine);
+            _properties=new TypedProperties()
+                .Add("culture", CultureInfo.CurrentCulture, "Culture to export", AssertCondition.IsNotNull)
+                .Add("encoding", Encoding.Default, "Encoding to export", AssertCondition.IsNotNull)
+                .Add("includeHeaders", true, "Include headers in export")
+                .Add("fieldSeparator", ',', "field separator in export")
+                .Add("recordSeparator", Environment.NewLine, "Record separator in export")
+                .ToReadOnly();
         }
 
+        public override TypedProperties Properties => _properties;
         public override string Format => "csv";
 
         public override void Export(string command, Stream output)
@@ -28,7 +32,7 @@ namespace DotNetAidLib.Database.Export
 
             IDbConnection cnx = null;
 
-            var sw = new StreamWriter(output, properties.Get<Encoding>("encoding"));
+            var sw = new StreamWriter(output, _properties.Get<Encoding>("encoding"));
             try
             {
                 cnx = DbProviderConnector.CreateConnection();
@@ -37,10 +41,10 @@ namespace DotNetAidLib.Database.Export
                 cmd.CommandText = command;
                 var dr = cmd.ExecuteReader();
                 dr.ToCSV(sw,
-                    properties.Get<CultureInfo>("culture"),
-                    properties.Get<bool>("includeHeaders"),
-                    properties.Get<char>("fieldSeparator"),
-                    properties.Get<string>("recordSeparator")
+                    _properties.Get<CultureInfo>("culture"),
+                    _properties.Get<bool>("includeHeaders"),
+                    _properties.Get<char>("fieldSeparator"),
+                    _properties.Get<string>("recordSeparator")
                 );
 
                 sw.Flush();

@@ -7,25 +7,19 @@ namespace DotNetAidLib.Database.Export
 {
     public abstract class DataExportDriver
     {
-        private DBProviderConnector dbProviderConnector;
-        protected TypedProperties properties;
+        private DBProviderConnector _dbProviderConnector;
 
-        public DataExportDriver()
-        {
-            properties = new TypedProperties();
-        }
-
-        public ReadOnlyTypedProperties Properties => properties;
+        public abstract TypedProperties Properties { get; }
 
         public abstract string Format { get; }
 
         public DBProviderConnector DbProviderConnector
         {
-            get => dbProviderConnector;
+            get => _dbProviderConnector;
             set
             {
                 Assert.NotNull(value, nameof(value));
-                dbProviderConnector = value;
+                _dbProviderConnector = value;
             }
         }
 
