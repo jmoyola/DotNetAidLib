@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
+using DotNetAidLib.Core.Collections;
 using DotNetAidLib.Core.Develop;
 
 namespace DotNetAidLib.Core.Cryptography.Encrypt

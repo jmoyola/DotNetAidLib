@@ -2,6 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using DotNetAidLib.Core.Collections;
 
 namespace DotNetAidLib.Core.Cryptography.CheckSum
 {

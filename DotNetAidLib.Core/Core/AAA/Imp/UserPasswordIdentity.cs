@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using DotNetAidLib.Core.AAA.Core;
 using DotNetAidLib.Core.Develop;
+using DotNetAidLib.Core.Helpers;
 
 namespace DotNetAidLib.Core.AAA.Imp
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
+using DotNetAidLib.Core.Collections;
 using DotNetAidLib.Core.Develop;
 using DotNetAidLib.Core.Time;
 using DotNetAidLib.Database.DbProviders;
@@ -192,36 +193,6 @@ namespace DotNetAidLib.Database
             Thread.CurrentThread.CurrentCulture = caux;
             return ret;
         }
-
-        /*
-        private String Serialize<T> (T value)
-        {
-            Assert.NotNull ( value, nameof(value));
-            String ret;
-
-            CultureInfo caux = Thread.CurrentThread.CurrentCulture;
-            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-
-            ret = value.ToString ();
-
-            Thread.CurrentThread.CurrentCulture = caux;
-            return ret;
-        }
-
-        private T Deserialize<T> (String value)
-        {
-            Assert.NotNullOrEmpty ( value, nameof(value));
-            T ret;
-
-            CultureInfo caux = Thread.CurrentThread.CurrentCulture;
-            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-
-            ret=(T)Convert.ChangeType (value, typeof (T));
-
-            Thread.CurrentThread.CurrentCulture = caux;
-            return ret;
-        }
-        */
 
         public static AppDbConfig Instance(DBProviderConnector dbConnector)
         {

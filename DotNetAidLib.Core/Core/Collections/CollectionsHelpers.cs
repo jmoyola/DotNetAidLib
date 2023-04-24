@@ -593,5 +593,80 @@ namespace DotNetAidLib.Core.Collections
                 return false;
             }
         }
+        
+         public static T[] ReadUntil<T>(this T[] v, T endMark)
+        {
+            return v.ReadUntil(endMark, 0);
+        }
+
+        public static T[] ReadUntil<T>(this T[] v, T endMark, int index)
+        {
+            var i = Array.IndexOf(v, endMark, index);
+            if (i == -1)
+                throw new Exception("Can find end of mark starting in '" + index + "'.");
+            return v.Extract(i, v.Length - i);
+        }
+
+        public static T[] Extract<T>(this T[] v, int index, long length)
+        {
+            var ret = new T[length];
+            Array.Copy(v, index, ret, 0, ret.Length);
+            return ret;
+        }
+
+        public static string ToHexadecimal(this IList<byte> v)
+        {
+            return v.ToHexadecimal(" ");
+        }
+
+        public static string ToHexadecimal(this IList<byte> v, string byteSeparator)
+        {
+            var ret = new StringBuilder();
+            if (v != null)
+            {
+                for (var i = 0; i < v.Count; i++)
+                {
+                    ret.AppendFormat("{0:X2}", v[i]);
+                    ret.Append(byteSeparator);
+                }
+
+                if (ret.Length > 0)
+                    ret.Remove(ret.Length - byteSeparator.Length, byteSeparator.Length);
+            }
+
+            return ret.ToString();
+        }
+
+        public static T[] Concat<T>(this T[] v, T[] o)
+        {
+            var ret = new T[v.Length + o.Length];
+
+            Array.Copy(v, 0, ret, 0, v.Length);
+            Array.Copy(o, 0, ret, v.Length, o.Length);
+
+            return ret;
+        }
+
+        public static void Initialize<T>(this IList<T> c, T value)
+        {
+            c.Initialize(0, c.Count, value);
+        }
+
+        public static void Initialize<T>(this IList<T> c, int start, int length, T value)
+        {
+            for (var i = start; i < start + length; i++)
+                c[i] = value;
+        }
+
+        public static void Initialize<T>(this IList<T> c, Func<T> method)
+        {
+            c.Initialize(0, c.Count, method);
+        }
+
+        public static void Initialize<T>(this IList<T> c, int start, int length, Func<T> method)
+        {
+            for (var i = start; i < start + length; i++)
+                c[i] = method.Invoke();
+        }
     }
 }

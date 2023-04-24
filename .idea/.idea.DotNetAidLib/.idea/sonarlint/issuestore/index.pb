@@ -23,10 +23,6 @@ d
 4DotNetAidLib.Core/Core/Cmd/ParameterInfoException.cs,d/7/d71c4fd8a59ce659868ac5c9818793f663e09139
 Z
 *DotNetAidLib.Core/Core/Helpers/TryParse.cs,6/1/613d78eba59cf911838a2d039eeff69652563c6f
-_
-/DotNetAidLib.Core/Core/Develop/DevelopHelper.cs,a/a/aac85536b2433e640bf54804cbc1cfe7f58001c3
-Y
-)DotNetAidLib.Core/Core/Text/TextHelper.cs,e/7/e7f6e90968796b52f518ca037ee7103ac29a98f8
 g
 7DotNetAidLib.Core/Core/Streams/Core/RawStreamFactory.cs,a/6/a63a9adf2e358ad5e57306ce0d44c83ed5b5407a
 i
@@ -127,22 +123,16 @@ Z
 0DotNetAidLib.Core/Core/Serializer/ISerializer.cs,1/3/139e66fc235e744d08a05764b3864af81e55067d
 b
 2DotNetAidLib.Core/Core/Serializer/IStringParser.cs,6/2/62a35581fbc171fedbffdd62b9a003c20bb505fd
-a
-1DotNetAidLib.Database/Database/DatabaseHelpers.cs,0/3/03420b0d85d883733834aee14d625a4eb1f053c0
 b
 2DotNetAidLib.Database/DotNetAidLib.Database.csproj,e/d/edbef9bda87d24bc7c47a2851650ec3c8e09636d
 [
 +DotNetAidLib.Core/Core/Helpers/Willcards.cs,9/3/93199275c2578c6c5311c0f5ab7534e815f8c9d8
-g
-7DotNetAidLib.Core/Core/Serializer/SimpleStringParser.cs,4/4/445116007a3022fa3bb0d5659bf6632edc1b6252
 Y
 )DotNetAidLib.Core/Core/Mail/Core/Email.cs,5/5/55ebb3ddca0ff4dc696ecce78c02c1aa19f8f749
 b
 2DotNetAidLib.Core/Core/Mail/Core/EmailException.cs,7/3/7304a70db2053b267454aa98a37623b8d3fbda16
 k
 ;DotNetAidLib.Core/Core/Mail/Core/EmailAttachedCollection.cs,8/a/8a6a9acbf36e2316b7cc83a5a5e4bf97dcb5939c
-h
-8DotNetAidLib.Core/Core/Collections/CollectionsHelpers.cs,b/4/b4729beb4a26f73143afda6ddd7fe13a7daa1f63
 e
 5DotNetAidLib.Core/Core/Mail/Smtp/Client/SmtpClient.cs,2/8/283a7e73556b8b55feeb59b4d605d247877adc91
 h
@@ -605,8 +595,6 @@ s
 CDotNetAidLib.Network/Network/Config/WLan/Client/Core/IWLanClient.cs,5/b/5b94b5e7dbe6ce1e7333900bd8f8d3415294b7a2
 
 ODotNetAidLib.Configuration/ApplicationConfig/Xml/XmlApplicationConfigFactory.cs,a/d/ad4b2d1299c61cfd902a43616d9893f70531230a
-w
-GDotNetAidLib.Network/Network/Config/WLan/Client/Core/WLanNetworkInfo.cs,e/b/eb6934a3d42cbc96a6824236c8497c87637ce708
 l
 <DotNetAidLib.Configuration/ApplicationConfig/Core/IConfig.cs,6/c/6cc866d555f196c74c2ee078fee1efcc8bc878e7
 x
@@ -663,8 +651,6 @@ r
 BDotNetAidLib.Core/Core/Network/Client/Imp/IPIfyPublicIPProvider.cs,6/5/657948392a7b4eeaff867df9e4368399a5d4e07f
 s
 CDotNetAidLib.Core/Core/Network/Client/Imp/DynDNSPublicIPProvider.cs,5/2/52d9ec7666415892bf9ae8d702b78cbddd0c669f
-x
-HDotNetAidLib.Core/Core/Cryptography/Encrypt/SymmetricEncriptAlgorithm.cs,3/b/3b84e455a43b3241f863bb8d55bd536028d84812
 z
 JDotNetAidLib.Core/Core/Cryptography/Encrypt/AsymmetricEncriptAlgorithm .cs,3/8/389c736e89bd862a0299cfe5f6d0405949672260
 s
@@ -689,8 +675,6 @@ t
 DDotNetAidLib.Network/Network/Info/Imp/PosixIEEE80211InterfaceInfo.cs,8/3/835b8f28020be5cfaa6e5edbc8c7b6f8fbc590eb
 l
 <DotNetAidLib.Core/Core/Cryptography/CheckSum/CRCException.cs,9/2/92f91a91c2bfb5eab187e9f2578a89b27893d4e4
-l
-<DotNetAidLib.Core/Core/Cryptography/CheckSum/HMACPassword.cs,c/7/c7ec50d653109ae8627bd48350666ab656a5ac9e
 `
 0DotNetAidLib.Network/Network/Info/Core/IPInfo.cs,8/0/80fb32569337ffef04078cbfbd6856116af1edb4
 n
@@ -711,8 +695,6 @@ n
 >DotNetAidLib.Network/Network/Info/Core/NetworkInterfaceInfo.cs,e/6/e6850722c1e2168346be834eadf6190c4cb5bd0c
 n
 >DotNetAidLib.Network/Network/Info/Core/NetworkInterfaceType.cs,c/6/c6cb95277d06a4f6f7c3288118415f82efdf69db
-p
-@DotNetAidLib.Network/Network/Info/Core/IEEE80211InterfaceInfo.cs,8/3/832cd44f4173645e0a79da8d4d2bc56fbeb404d4
 e
 5DotNetAidLib.Core/Core/Files/Archive/Tar/TarHeader.cs,5/4/54ef0a656d7902532b8ef3c5da811115c6fc0d1d
 x
@@ -761,8 +743,6 @@ h
 8DotNetAidLib.Core/Core/Files/Archive/Core/ArchiveFile.cs,a/4/a4cd02bfe34f5c83b08540a8bb2334ef7479dd52
 k
 ;DotNetAidLib.Core/Core/Network/Server/TCPServerException.cs,7/c/7ce3b8df8b95b99d28dcd62bdf0815df8bca7f23
-h
-8DotNetAidLib.Core/Core/Files/Archive/Core/ArchivePart.cs,5/f/5f790b602530897dd87eae166de63fd76f4bf0e0
 k
 ;DotNetAidLib.Core/Core/Network/Server/UDPServerException.cs,f/2/f22fe4ae9b151274694d7b3c00a031603f304434
 ]
@@ -833,8 +813,6 @@ y
 IDotNetAidLib.OperatingSystem/OperatingSystem/Imp/WindowsSerialPortInfo.cs,4/d/4d28b4192c65026e7e5c765c1d8d04de08ddb02d
 z
 JDotNetAidLib.OperatingSystem/OperatingSystem/Imp/WindowsOperatingSystem.cs,5/f/5f21d7c12c4fc00a258bf225f7026bf358286848
-f
-6DotNetAidLib.Core/Core/AAA/Imp/UserPasswordIdentity.cs,5/3/53c4bbe7a675797b51b5d46ab3692b8451588b81
 p
 @DotNetAidLib.Core/Core/AAA/Imp/EnvVarAuthUserPasswordProvider.cs,8/1/816a9a23650f40e28e0ee3d36f2b17437f935fbf
 q
@@ -881,8 +859,6 @@ z
 JDotNetAidLib.Network/Network/Config/TcpIp/Imp/DebianTCPNetworkingConfig.cs,3/b/3b878fcbf108ef57f7639681f2e21fed46b0c1e2
 n
 >DotNetAidLib.Network/Network/Config/imp/DebianNetworkConfig.cs,f/5/f5bcfe410868d5d306e2f50129d829f3740e305c
-]
--DotNetAidLib.Database/Database/AppDbConfig.cs,9/b/9bf99f6f641954b789ccc75604858d24d63efbb4
 V
 &DotNetAidLib.Core/Core/Drawing/Rect.cs,2/8/28acf1a727829ca58f407c4dc4c29ce4d8f163dd
 Z
@@ -897,3 +873,9 @@ W
 'DotNetAidLib.Core/Core/Drawing/Point.cs,0/7/079b3d281d34bb1462c1ffd482b19c56db26e252
 X
 (DotNetAidLib.Core/Core/Drawing/BitMap.cs,b/5/b52a6985fe51fe6260fc6e6d670aa90c7d53e4e4
+c
+3DotNetAidLib.Database/Database/Export/DataExport.cs,c/2/c2b058cefa442b0c8461361183cde52f55915dc6
+\
+,DotNetAidLib.Core/Core/Collections/Vector.cs,2/4/24de8351b11d149323ed07906d895ed6920c9a2c
+c
+3DotNetAidLib.Core/Core/Collections/TypedProperty.cs,4/4/441153443569a02c624e630524e494e455f93ca4

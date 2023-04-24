@@ -1,4 +1,5 @@
 ﻿using System;
+using DotNetAidLib.Core.Helpers;
 
 namespace DotNetAidLib.Core.IO.Archive.Core
 {

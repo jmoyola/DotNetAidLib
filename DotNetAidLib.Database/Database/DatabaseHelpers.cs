@@ -13,6 +13,7 @@ using System.Xml;
 using DotNetAidLib.Core.Cmd;
 using DotNetAidLib.Core.Collections;
 using DotNetAidLib.Core.Develop;
+using DotNetAidLib.Core.Helpers;
 using DotNetAidLib.Core.IO.Archive.Core;
 using DotNetAidLib.Core.Streams;
 using DotNetAidLib.Database.DbProviders;

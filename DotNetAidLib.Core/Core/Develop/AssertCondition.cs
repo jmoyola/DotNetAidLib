@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Text.RegularExpressions;
+using DotNetAidLib.Core.Helpers;
 
 namespace DotNetAidLib.Core.Develop
 {

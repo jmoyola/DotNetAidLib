@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using DotNetAidLib.Core.Collections;
 using DotNetAidLib.Core.Develop;
 using DotNetAidLib.Core.Network.Info.Imp;
 

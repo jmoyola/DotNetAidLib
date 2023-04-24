@@ -1,4 +1,5 @@
 ﻿using System;
+using DotNetAidLib.Core.Collections;
 
 namespace DotNetAidLib.Network.Config.WLan.Client.Core
 {

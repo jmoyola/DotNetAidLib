@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
 using DotNetAidLib.Core.Collections;
+using DotNetAidLib.Core.Helpers;
 
 namespace DotNetAidLib.Core.Serializer
 {
